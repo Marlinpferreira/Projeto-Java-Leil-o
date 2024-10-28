@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VendasVIEW extends javax.swing.JFrame {
@@ -31,7 +32,25 @@ public class VendasVIEW extends javax.swing.JFrame {
         }
     }
 
-    // Código gerado automaticamente pelo NetBeans ao adicionar componentes
+    private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {
+    String id = id_produto_venda.getText();
+
+    if (id.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, insira o ID do produto");
+        return;
+    }
+
+    ProdutosDAO produtosDao = new ProdutosDAO();
+    boolean sucesso = produtosDao.venderProduto(Integer.parseInt(id));
+
+    if (sucesso) {
+        JOptionPane.showMessageDialog(this, "Produto vendido com sucesso!");
+        listarProdutos();
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao vender o produto.");
+    }
+}
+// Código gerado automaticamente pelo NetBeans ao adicionar componentes
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
@@ -110,5 +129,9 @@ public class VendasVIEW extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaVendas;
-    // Fim da declaração de variáveis                   
-}
+
+    private void listarProdutos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+  }
