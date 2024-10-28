@@ -1,3 +1,9 @@
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -149,13 +155,38 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setStatus(status);
         
         ProdutosDAO produtodao = new ProdutosDAO();
-        produtodao.cadastrarProduto(produto);
+        try {
+            produtodao.cadastrarProduto(produto);
+        } catch (SQLException ex) {
+            Logger.getLogger(cadastroVIEW.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        listagemVIEW listagem = new listagemVIEW(); 
-        listagem.setVisible(true);
+ProdutosDTO produto = new ProdutosDTO();
+    String nome = cadastroNome.getText();
+    String valor = cadastroValor.getText();
+    String status = "A Venda";
+    produto.setNome(nome);
+    produto.setValor(Integer.parseInt(valor));
+    produto.setStatus(status);
+    
+    ProdutosDAO produtodao = new ProdutosDAO();
+    
+    // Verifica se o cadastro foi bem-sucedido
+    boolean sucesso = false;
+        try {
+            sucesso = produtodao.cadastrarProduto(produto);
+        } catch (SQLException ex) {
+            Logger.getLogger(cadastroVIEW.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    if (sucesso) {
+        JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+    } else {
+        JOptionPane.showMessageDialog(this, "Erro ao cadastrar o produto.");
+    }
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**
