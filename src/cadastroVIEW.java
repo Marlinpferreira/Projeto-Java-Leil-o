@@ -155,12 +155,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setStatus(status);
         
         ProdutosDAO produtodao = new ProdutosDAO();
-        try {
-            produtodao.cadastrarProduto(produto);
-        } catch (SQLException ex) {
-            Logger.getLogger(cadastroVIEW.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        produtodao.cadastrarProduto(produto);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
@@ -176,11 +171,7 @@ ProdutosDTO produto = new ProdutosDTO();
     
     // Verifica se o cadastro foi bem-sucedido
     boolean sucesso = false;
-        try {
-            sucesso = produtodao.cadastrarProduto(produto);
-        } catch (SQLException ex) {
-            Logger.getLogger(cadastroVIEW.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    sucesso = produtodao.cadastrarProduto(produto);
     
     if (sucesso) {
         JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
